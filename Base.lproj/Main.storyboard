@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="F3M-RH-jac"/>
+                        <viewControllerLayoutGuide type="bottom" id="RRm-zW-w8X"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ysl-Ip-aeR">
+                                <rect key="frame" x="0.0" y="522" width="322" height="2"/>
+                            </progressView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g4Q-Hl-K0V">
+                                <rect key="frame" x="-2" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="rewind" id="uso-nr-3mW">
+                                        <connections>
+                                            <action selector="goBack" destination="2sE-Hz-tgW" id="wd3-Qi-LF2"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="refresh" id="xiB-C6-Ozw">
+                                        <connections>
+                                            <action selector="reload" destination="2sE-Hz-tgW" id="nIc-YM-nY6"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="fastForward" id="CFm-iE-s2d">
+                                        <connections>
+                                            <action selector="goForward" destination="2sE-Hz-tgW" id="Ydf-fd-jYD"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="R3C-h8-FvC"/>
+                                    <barButtonItem systemItem="organize" id="sMs-0X-oJQ"/>
+                                    <barButtonItem systemItem="flexibleSpace" id="yWt-Gz-vcs"/>
+                                    <barButtonItem systemItem="pause" id="oss-Vn-yun"/>
+                                </items>
+                            </toolbar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2sE-Hz-tgW">
+                                <rect key="frame" x="-2" y="19" width="326" height="505"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2sE-Hz-tgW" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="19" id="1nW-XC-L9k"/>
+                            <constraint firstItem="g4Q-Hl-K0V" firstAttribute="bottom" secondItem="RRm-zW-w8X" secondAttribute="top" id="8qs-jX-FZd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="g4Q-Hl-K0V" secondAttribute="trailing" constant="-14" id="JHL-x8-2z8"/>
+                            <constraint firstItem="g4Q-Hl-K0V" firstAttribute="top" secondItem="2sE-Hz-tgW" secondAttribute="bottom" id="P5I-sd-jel"/>
+                            <constraint firstItem="2sE-Hz-tgW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-18" id="RnZ-yv-XE4"/>
+                            <constraint firstItem="2sE-Hz-tgW" firstAttribute="centerX" secondItem="Ysl-Ip-aeR" secondAttribute="centerX" id="djr-Dt-Rei"/>
+                            <constraint firstItem="2sE-Hz-tgW" firstAttribute="leading" secondItem="g4Q-Hl-K0V" secondAttribute="leading" id="f7c-yb-3qy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ysl-Ip-aeR" secondAttribute="trailing" constant="-18" id="kSh-dJ-nLz"/>
+                            <constraint firstItem="Ysl-Ip-aeR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="p1T-bZ-BQE"/>
+                            <constraint firstItem="g4Q-Hl-K0V" firstAttribute="top" secondItem="Ysl-Ip-aeR" secondAttribute="bottom" id="pOd-sD-lAd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="MyWeb" destination="2sE-Hz-tgW" id="0Cg-M4-LGm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="109" y="395.99999999999994"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
