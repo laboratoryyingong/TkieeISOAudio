@@ -34,6 +34,7 @@
 
 
 
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -41,18 +42,18 @@
     
     //Load Tkiee Website
     NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.tkiee.com"]];
-    [self.view addSubview: MyUIWeb];
-    [MyUIWeb loadRequest:request];
+   // [self.view addSubview: MyUIWeb];
+    [self.MyUIWeb loadRequest:request];
     
     
-   //initial levermeter
-    self.leverlMeter.progress =0;
+    //initial levermeter
+     self.leverlMeter.progress =0;
     
     //init recordbutton
     [self.recordButton addTarget:self action:@selector(recordButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     self.consolelable.numberOfLines =0;
-    self.consolelable.text= @"Recording tkiee audio";
+    self.consolelable.text= @"Recording Tkiee Audio";
     
 
 }
@@ -91,7 +92,7 @@
     
     }
 
-// Recording Delegate
+#pragma mark - Recording & Playing Delegate
 
 - (void)recordingFinishedWithFileName:(NSString *)filePath time:(NSTimeInterval)interval {
     self.isRecording = NO;
