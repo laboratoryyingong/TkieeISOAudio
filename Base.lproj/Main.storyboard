@@ -39,26 +39,24 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="R3C-h8-FvC"/>
-                                    <barButtonItem style="plain" id="9Qc-Cf-DhU">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J6Q-5w-k7m">
-                                            <rect key="frame" x="137" y="7" width="30" height="30"/>
+                                    <barButtonItem style="plain" id="wPY-lz-6VE">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Tgp-jp-i2s">
+                                            <rect key="frame" x="178" y="7" width="129" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Rec">
+                                            <state key="normal" title="Press to Start">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
                                     </barButtonItem>
-                                    <barButtonItem systemItem="flexibleSpace" id="yWt-Gz-vcs"/>
-                                    <barButtonItem systemItem="pause" id="oss-Vn-yun"/>
                                 </items>
                             </toolbar>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2sE-Hz-tgW">
                                 <rect key="frame" x="-4" y="16" width="326" height="483"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyV-gb-CXq">
-                                <rect key="frame" x="139" y="498" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyV-gb-CXq">
+                                <rect key="frame" x="140" y="497" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -67,7 +65,8 @@
                         <constraints>
                             <constraint firstItem="2sE-Hz-tgW" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="16" id="1nW-XC-L9k"/>
                             <constraint firstItem="g4Q-Hl-K0V" firstAttribute="bottom" secondItem="RRm-zW-w8X" secondAttribute="top" id="8qs-jX-FZd"/>
-                            <constraint firstItem="yyV-gb-CXq" firstAttribute="bottom" secondItem="g4Q-Hl-K0V" secondAttribute="top" constant="-5" id="GXh-My-yEQ"/>
+                            <constraint firstAttribute="centerX" secondItem="yyV-gb-CXq" secondAttribute="centerX" constant="-1" id="F6u-Ws-4wm"/>
+                            <constraint firstItem="yyV-gb-CXq" firstAttribute="bottom" secondItem="g4Q-Hl-K0V" secondAttribute="top" constant="-6" id="GXh-My-yEQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g4Q-Hl-K0V" secondAttribute="trailing" constant="-14" id="JHL-x8-2z8"/>
                             <constraint firstItem="g4Q-Hl-K0V" firstAttribute="top" secondItem="2sE-Hz-tgW" secondAttribute="bottom" constant="25" id="P5I-sd-jel"/>
                             <constraint firstItem="2sE-Hz-tgW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="RnZ-yv-XE4"/>
@@ -76,17 +75,18 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Ysl-Ip-aeR" secondAttribute="trailing" constant="-18" id="kSh-dJ-nLz"/>
                             <constraint firstItem="Ysl-Ip-aeR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="p1T-bZ-BQE"/>
                             <constraint firstItem="g4Q-Hl-K0V" firstAttribute="top" secondItem="Ysl-Ip-aeR" secondAttribute="bottom" id="pOd-sD-lAd"/>
-                            <constraint firstItem="yyV-gb-CXq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="roc-5x-XKW"/>
+                            <constraint firstItem="yyV-gb-CXq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="1" id="roc-5x-XKW"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="MyUIWeb" destination="2sE-Hz-tgW" id="pxS-zA-nb7"/>
                         <outlet property="consolelable" destination="yyV-gb-CXq" id="yga-oB-9ie"/>
+                        <outlet property="recordButton" destination="Tgp-jp-i2s" id="FDn-bV-pMk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="109" y="395"/>
+            <point key="canvasLocation" x="106" y="395"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -12,9 +12,7 @@
 
 @interface ViewController () <RecordingDelegate>
 
-
 @property (strong, nonatomic) IBOutlet UIProgressView *leverlMeter;
-
 
 @property (strong, nonatomic) IBOutlet UIButton *recordButton;
 
@@ -32,12 +30,20 @@
 
 @synthesize MyUIWeb;
 
-
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
 
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
     [self addObserver:self forKeyPath:@"isRecording" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
     
     //Load Tkiee Website
@@ -45,15 +51,16 @@
    // [self.view addSubview: MyUIWeb];
     [self.MyUIWeb loadRequest:request];
     
+    self.consolelable.numberOfLines =2;
+    self.consolelable.text= @"Recording Tkiee Audio";
     
     //initial levermeter
-     self.leverlMeter.progress =0;
+     self.leverlMeter.progress = 0;
     
     //init recordbutton
     [self.recordButton addTarget:self action:@selector(recordButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.consolelable.numberOfLines =0;
-    self.consolelable.text= @"Recording Tkiee Audio";
+
     
 
 }
