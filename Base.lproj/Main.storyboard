@@ -49,23 +49,14 @@
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="yir-Qh-Kqb"/>
-                                    <barButtonItem style="plain" id="auN-Wk-ERd">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="q3l-11-kG3">
-                                            <rect key="frame" x="258" y="7" width="36" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Send">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
-                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2sE-Hz-tgW">
-                                <rect key="frame" x="-4" y="16" width="326" height="483"/>
+                                <rect key="frame" x="-4" y="16" width="326" height="479"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyV-gb-CXq">
-                                <rect key="frame" x="140" y="497" width="42" height="21"/>
+                                <rect key="frame" x="140" y="498" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -76,9 +67,9 @@
                             <constraint firstItem="2sE-Hz-tgW" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="16" id="1nW-XC-L9k"/>
                             <constraint firstItem="g4Q-Hl-K0V" firstAttribute="bottom" secondItem="RRm-zW-w8X" secondAttribute="top" id="8qs-jX-FZd"/>
                             <constraint firstAttribute="centerX" secondItem="yyV-gb-CXq" secondAttribute="centerX" constant="-1" id="F6u-Ws-4wm"/>
-                            <constraint firstItem="yyV-gb-CXq" firstAttribute="bottom" secondItem="g4Q-Hl-K0V" secondAttribute="top" constant="-6" id="GXh-My-yEQ"/>
+                            <constraint firstItem="yyV-gb-CXq" firstAttribute="bottom" secondItem="g4Q-Hl-K0V" secondAttribute="top" constant="-5" id="GXh-My-yEQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g4Q-Hl-K0V" secondAttribute="trailing" constant="-14" id="JHL-x8-2z8"/>
-                            <constraint firstItem="g4Q-Hl-K0V" firstAttribute="top" secondItem="2sE-Hz-tgW" secondAttribute="bottom" constant="25" id="P5I-sd-jel"/>
+                            <constraint firstItem="g4Q-Hl-K0V" firstAttribute="top" secondItem="2sE-Hz-tgW" secondAttribute="bottom" constant="29" id="P5I-sd-jel"/>
                             <constraint firstItem="2sE-Hz-tgW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="RnZ-yv-XE4"/>
                             <constraint firstItem="2sE-Hz-tgW" firstAttribute="centerX" secondItem="Ysl-Ip-aeR" secondAttribute="centerX" constant="-2" id="djr-Dt-Rei"/>
                             <constraint firstItem="2sE-Hz-tgW" firstAttribute="leading" secondItem="g4Q-Hl-K0V" secondAttribute="leading" constant="-2" id="f7c-yb-3qy"/>
@@ -89,10 +80,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="MyUIWeb" destination="2sE-Hz-tgW" id="pxS-zA-nb7"/>
+                        <outlet property="MyWebUi" destination="2sE-Hz-tgW" id="LaG-Ol-ImM"/>
                         <outlet property="consolelable" destination="yyV-gb-CXq" id="yga-oB-9ie"/>
                         <outlet property="recordButton" destination="Tgp-jp-i2s" id="FDn-bV-pMk"/>
-                        <outlet property="udpSendBtn" destination="q3l-11-kG3" id="ER0-Ok-Z6y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
