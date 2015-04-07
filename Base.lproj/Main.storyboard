@@ -54,6 +54,9 @@
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2sE-Hz-tgW">
                                 <rect key="frame" x="-4" y="16" width="326" height="479"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="XOE-eA-cQx"/>
+                                </connections>
                             </webView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyV-gb-CXq">
                                 <rect key="frame" x="140" y="498" width="42" height="21"/>
@@ -61,6 +64,10 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ldh-sJ-EBu">
+                                <rect key="frame" x="142" y="231" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -80,8 +87,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="MyWebUi" destination="2sE-Hz-tgW" id="LaG-Ol-ImM"/>
-                        <outlet property="consolelable" destination="yyV-gb-CXq" id="yga-oB-9ie"/>
+                        <outlet property="activityIndicator" destination="ldh-sJ-EBu" id="GgW-lu-ZQh"/>
+                        <outlet property="consolelable" destination="yyV-gb-CXq" id="x7I-Vm-ySg"/>
                         <outlet property="recordButton" destination="Tgp-jp-i2s" id="FDn-bV-pMk"/>
                     </connections>
                 </viewController>

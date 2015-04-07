@@ -29,9 +29,9 @@
 
 @property (strong, nonatomic) IBOutlet UIProgressView *leverlMeter;
 
-@property (strong, nonatomic) IBOutlet UIButton *recordButton;
-
 @property (strong, nonatomic) IBOutlet UILabel *consolelable;
+
+@property (strong, nonatomic) IBOutlet UIButton *recordButton;
 
 @property (nonatomic,copy) NSString *filename;
 
@@ -45,7 +45,8 @@
 
 @implementation ViewController
 
-@synthesize MyWebUi;
+@synthesize MyWeb;
+@synthesize activityIndicator;
 
 
 
@@ -62,13 +63,11 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    [self addObserver:self forKeyPath:@"isRecording" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
-    
-    //Load Tkiee Website
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.tkiee.com"]];
-   // [self.view addSubview: MyUIWeb];
-    [self.MyWebUi loadRequest:request];
+    //Tkiee Website
+    NSURL *websiteUrl=[NSURL URLWithString:@"http://www.tkiee.com"];
+    NSURLRequest *request=[NSURLRequest requestWithURL:websiteUrl];
+    //[self.view addSubview:MyWeb ];
+    [MyWeb loadRequest:request];
     
     self.consolelable.numberOfLines =2;
     self.consolelable.text= @"Recording Tkiee Audio";
@@ -79,9 +78,9 @@
     //init recordbutton
     [self.recordButton addTarget:self action:@selector(recordButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
+    [self addObserver:self forKeyPath:@"isRecording" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
+    
 }
-
-
 
 
 
@@ -97,6 +96,9 @@
 
 -(void) dealloc{
     [self removeObserver:self forKeyPath:@"isRecording"];
+    [MyWeb release];
+    [activityIndicator release];
+    [super dealloc];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -152,6 +154,12 @@
 - (void)levelMeterChanged:(float)levelMeter {
     self.leverlMeter.progress = levelMeter;
 }
+
+
+
+
+
+
 
 
 

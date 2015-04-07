@@ -17,27 +17,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TKIEE AUDIO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJs-AH-o4G">
-                        <rect key="frame" x="111" y="225" width="119" height="118"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Powered by UniSA.Tkiee" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="39Z-2H-e1y">
                         <rect key="frame" x="77" y="330" width="186" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TKIEE AUDIO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJs-AH-o4G">
+                        <rect key="frame" x="110" y="227" width="119" height="118"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="39Z-2H-e1y" firstAttribute="centerX" secondItem="tJs-AH-o4G" secondAttribute="centerX" id="60V-bt-OH0"/>
                     <constraint firstAttribute="trailingMargin" secondItem="39Z-2H-e1y" secondAttribute="trailing" constant="41" id="9Zc-Fk-Qgy"/>
-                    <constraint firstItem="tJs-AH-o4G" firstAttribute="centerY" secondItem="3Tx-AD-xFj" secondAttribute="centerY" id="Amx-XB-X9G"/>
+                    <constraint firstItem="tJs-AH-o4G" firstAttribute="centerY" secondItem="3Tx-AD-xFj" secondAttribute="centerY" constant="2" id="Amx-XB-X9G"/>
                     <constraint firstItem="ECG-zO-K4X" firstAttribute="top" secondItem="39Z-2H-e1y" secondAttribute="bottom" constant="208" id="clG-nY-kAo"/>
                     <constraint firstItem="39Z-2H-e1y" firstAttribute="leading" secondItem="3Tx-AD-xFj" secondAttribute="leadingMargin" constant="61" id="rqz-rL-QHp"/>
-                    <constraint firstItem="tJs-AH-o4G" firstAttribute="leading" secondItem="3Tx-AD-xFj" secondAttribute="leadingMargin" constant="95" id="wUF-Mu-t1J"/>
-                    <constraint firstItem="tJs-AH-o4G" firstAttribute="top" secondItem="Djk-1G-wDS" secondAttribute="bottom" constant="205" id="xbc-T5-hYM"/>
+                    <constraint firstItem="tJs-AH-o4G" firstAttribute="leading" secondItem="3Tx-AD-xFj" secondAttribute="leadingMargin" constant="94" id="wUF-Mu-t1J"/>
+                    <constraint firstItem="tJs-AH-o4G" firstAttribute="top" secondItem="Djk-1G-wDS" secondAttribute="bottom" constant="207" id="xbc-T5-hYM"/>
                 </constraints>
             </view>
             <point key="canvasLocation" x="354" y="313"/>

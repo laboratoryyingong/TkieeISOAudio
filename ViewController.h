@@ -14,7 +14,10 @@
 
 @interface ViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UIWebView *MyWebUi;
+@property (strong, nonatomic) IBOutlet UIWebView *MyWeb;
+
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 
 
 
