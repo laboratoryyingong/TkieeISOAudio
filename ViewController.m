@@ -69,7 +69,7 @@
     //[self.view addSubview:MyWeb ];
     [MyWeb loadRequest:request];
     
-    self.consolelable.numberOfLines =2;
+    self.consolelable.numberOfLines =0;
     self.consolelable.text= @"Recording Tkiee Audio";
     
     //initial levermeter
