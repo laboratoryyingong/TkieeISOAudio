@@ -21,11 +21,14 @@
 #include <sys/time.h>
 #include <time.h>
 
-#define tcp_port  2000
-#define udp_send_port  2001
-#define udp_recv_port  2002
+#import "FastSocket.h"
+#import "FastServerSocket.h"
+
+
 
 @interface ViewController () <RecordingDelegate>
+
+
 
 @property (strong, nonatomic) IBOutlet UIProgressView *leverlMeter;
 
@@ -47,7 +50,6 @@
 
 @synthesize MyWeb;
 @synthesize activityIndicator;
-
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
