@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "RecorderManager.h"
 #import "PlayerManager.h"
-#import "MKNetworkKit.h"
+
 
 
 #import <stdio.h>
@@ -39,6 +39,10 @@
 
 @property (nonatomic,copy) NSString *filename;
 
+@property (strong, nonatomic) IBOutlet UIButton *uploadBtn;
+
+
+
 -(IBAction)recordButtonClicked:(id)sender;
 
 @property (nonatomic,assign) BOOL isRecording;
@@ -51,6 +55,7 @@
 
 @synthesize MyWeb;
 @synthesize activityIndicator;
+@synthesize uploadBtn;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -83,11 +88,48 @@
     
     [self addObserver:self forKeyPath:@"isRecording" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
     
+    [uploadBtn setTitle:@"upload" forState:UIControlStateNormal];
+    [uploadBtn addTarget:self action:@selector(upload) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:uploadBtn];
+    
 }
 
 
 
+// upload method
 
+-(void)upload {
+
+    NSURL *url=[NSURL URLWithString:@"127.0.0.1"];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    
+    [request setDelegate:self];
+    [request setRequestMethod:@"POST"];
+    [request setFile:self.filename forKey:@"file"];
+    [request setDidFinishSelector:@selector(uploadrequestFinished:)];
+    [request setDidFailSelector:@selector(uploadRequestFailed:)];
+    
+    [request startAsynchronous];
+    
+    
+    
+}
+
+
+
+-(void)requestFinished:(ASIHTTPRequest *)request {
+
+    NSData *responseData =[request reponseData];
+    
+    NSString *response= [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Server response:%@", response);
+}
+
+-(void)uploadRequestFailed:(ASIHTTPRequest *)request{
+
+    NSLog(@"[TWDEBUG] Error - upload failed: \"%@\"",[[request error] localizedDescription]);
+}
 
 
 

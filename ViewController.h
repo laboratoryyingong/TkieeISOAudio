@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 
 
 @class CL_AudioRecorder;
 
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <ASIHTTPRequestDelegate>
+
+@property (nonatomic,copy)NSString *m_auth;
 
 @property (strong, nonatomic) IBOutlet UIWebView *MyWeb;
-
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
