@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "RecorderManager.h"
+#import "ASIFormDataRequest.h"
 #import "PlayerManager.h"
 
 
@@ -20,6 +21,7 @@
 #import <netdb.h>
 #import <string.h>
 #import <fcntl.h>
+#import <CoreAudio/CoreAudioTypes.h>
 
 #include <sys/time.h>
 #include <time.h>
@@ -30,22 +32,29 @@
 @interface ViewController () <RecordingDelegate>
 
 
-
 @property (strong, nonatomic) IBOutlet UIProgressView *leverlMeter;
 
 @property (strong, nonatomic) IBOutlet UILabel *consolelable;
 
+
 @property (strong, nonatomic) IBOutlet UIButton *recordButton;
-
-@property (nonatomic,copy) NSString *filename;
-
-@property (strong, nonatomic) IBOutlet UIButton *uploadBtn;
-
-
 
 -(IBAction)recordButtonClicked:(id)sender;
 
+
+@property (nonatomic,copy) NSString *filename;
+
 @property (nonatomic,assign) BOOL isRecording;
+
+
+
+// define two methods to deal with file upload successfully
+
+-(void)uploadFailed:(ASIHTTPRequest *)theRequest;
+-(void)uploadFinished:(ASIHTTPRequest *)theRequest;
+
+
+
 
 @end
 
@@ -53,9 +62,11 @@
 
 @implementation ViewController
 
+
 @synthesize MyWeb;
 @synthesize activityIndicator;
-@synthesize uploadBtn;
+@synthesize upLoadBtn;
+@synthesize txtlabel;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -73,68 +84,152 @@
     [super viewDidLoad];
     //Tkiee Website
     NSURL *websiteUrl=[NSURL URLWithString:@"http://www.tkiee.com"];
-    NSURLRequest *request=[NSURLRequest requestWithURL:websiteUrl];
-    //[self.view addSubview:MyWeb ];
-    [MyWeb loadRequest:request];
+    NSURLRequest *myrequest=[NSURLRequest requestWithURL:websiteUrl];
+    [self.view addSubview:MyWeb ];
+    [MyWeb loadRequest:myrequest];
     
     self.consolelable.numberOfLines =0;
     self.consolelable.text= @"Recording Tkiee Audio";
     
     //initial levermeter
-     self.leverlMeter.progress = 0;
+    self.leverlMeter.progress = 0;
     
     //init recordbutton
     [self.recordButton addTarget:self action:@selector(recordButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addObserver:self forKeyPath:@"isRecording" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
     
-    [uploadBtn setTitle:@"upload" forState:UIControlStateNormal];
-    [uploadBtn addTarget:self action:@selector(upload) forControlEvents:UIControlEventTouchUpInside];
+    //upload button
     
-    [self.view addSubview:uploadBtn];
+    [self.upLoadBtn addTarget:self action:@selector(uploadbtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+
     
 }
 
 
+-(void)viewDidUnload
+{
+    [self setTxtlabel:nil];
+    [super viewDidUnload];
+}
 
-// upload method
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
 
--(void)upload {
+// upload button
 
-    NSURL *url=[NSURL URLWithString:@"127.0.0.1"];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+- (IBAction)uploadbtnClicked:(id)sender
+{
     
+    ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"http://localhost:80/upload.php"]];
+    [request setTimeOutSeconds:20];
+    
+    #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
+    [request setShouldContinueWhenAppEntersBackground:YES];
+    #endif
+    
+    [request setUploadProgressDelegate:progressIndicator];
+    
+    //set up delegate
     [request setDelegate:self];
-    [request setRequestMethod:@"POST"];
+    [request setDidFailSelector:@selector(uploadFailed:)];
+    [request setDidFinishSelector:@selector(uploadFinished:)];
+
+    
+    NSFileManager *fileManeger=[NSFileManager defaultManager];
+    
+    // check files exist
+    if([fileManeger fileExistsAtPath:self.filename])
+    {
+        NSLog(@"******Recording files exist******");
+    }
+    
+    else
+    {
+        NSLog(@"******Recording files lost*****");
+    }
+    
+    NSLog(@"%@",self.filename);
+    
+    //upload files
+    
     [request setFile:self.filename forKey:@"file"];
-    [request setDidFinishSelector:@selector(uploadrequestFinished:)];
-    [request setDidFailSelector:@selector(uploadRequestFailed:)];
     
     [request startAsynchronous];
-    
+    [self.txtlabel setText:@"Uploading data..."];
     
     
 }
 
+- (IBAction)toggleThrottling:(id)sender
+{
+    [ASIHTTPRequest setShouldThrottleBandwidthForWWAN:[(UISwitch *)sender isOn]];
+}
 
 
--(void)requestFinished:(ASIHTTPRequest *)request {
+- (void)uploadFailed:(ASIHTTPRequest *)theRequest
+{
+    [self.txtlabel setText:[NSString stringWithFormat:@"Request failed:\r\n%@",[[theRequest error] localizedDescription]]];
+}
 
-    NSData *responseData =[request reponseData];
+- (void)uploadFinished:(ASIHTTPRequest *)theRequest
+{
+    [self.txtlabel setText:[NSString stringWithFormat:@"Finished uploading %llu bytes of data",[theRequest postLength]]];
     
-    NSString *response= [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    NSLog(@"Server response:%@", response);
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
+    // Clear out the old notification before scheduling a new one.
+    if ([[[UIApplication sharedApplication] scheduledLocalNotifications] count] > 0)
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    // Create a new notification
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    if (notification) {
+        [notification setFireDate:[NSDate date]];
+        [notification setTimeZone:[NSTimeZone defaultTimeZone]];
+        [notification setRepeatInterval:0];
+        [notification setSoundName:@"alarmsound.caf"];
+        [notification setAlertBody:@"Boom!\r\n\r\nUpload is finished!"];
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
+#endif
+    
+    
+    
+    NSLog(@"successful");
+    
+ //   NSLog([NSString stringWithFormat:@"transfer %llu ",[theRequest postLength]]);
+    
+    
+    NSMutableDictionary *headerData=[theRequest requestHeaders];
+    NSLog(@"%@",headerData);
+    NSLog(@"all keys：%@",headerData.allKeys);
+    NSLog(@"all values：%@",headerData.allValues);
+    NSLog(@"User-Agent:%@",[headerData objectForKey:@"User-Agent"]);
+    NSLog(@"Content-Type:%@",[headerData objectForKey:@"Content-Type"]);
+    NSLog(@"Content-Length:%@",[headerData objectForKey:@"Content-Length"]);
+    NSLog(@"Accept-Encoding:%@",[headerData objectForKey:@"Accept-Encoding"]);
+    
+    //
+    NSString *requestData=[theRequest responseString];
+    NSLog(@"%@",requestData);
+    //[txt setText:requestData];
+    
+    NSData *udata=[theRequest responseData];
+    NSStringEncoding encodeUdata=CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF8);
+    NSString *getUserData=[[NSString alloc] initWithData:udata encoding:encodeUdata];
+    NSLog(@"%@",getUserData);
 }
 
--(void)uploadRequestFailed:(ASIHTTPRequest *)request{
-
-    NSLog(@"[TWDEBUG] Error - upload failed: \"%@\"",[[request error] localizedDescription]);
-}
 
 
 
 
-- (void)didReceiveMemoryWarning {
+-(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -152,6 +247,9 @@
         {[self.recordButton setTitle:(self.isRecording? @"Pause": @"Record") forState:UIControlStateNormal];
             
             }
+        if (![keyPath isEqualToString:@"isRecording"])
+        {[self.upLoadBtn setTitle:(self.isRecording? @"May Upload":@"Not Upload") forState:UIControlStateNormal];
+        }
     }
 
 

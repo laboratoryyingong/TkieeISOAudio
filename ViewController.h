@@ -12,11 +12,24 @@
 
 
 @class CL_AudioRecorder;
+@class ASIFormDataRequest;
 
 
-@interface ViewController : UIViewController <ASIHTTPRequestDelegate>
+@interface ViewController : UIViewController
 
-@property (nonatomic,copy)NSString *m_auth;
+{
+    //ASIFormDataRequest *request;
+    
+    IBOutlet UIProgressView *progressIndicator;
+
+}
+
+- (IBAction)uploadbtnClicked:(id)sender;
+- (IBAction)toggleThrottling:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UILabel *txtlabel;
+
+@property (strong, nonatomic) IBOutlet UIButton *upLoadBtn;
 
 @property (strong, nonatomic) IBOutlet UIWebView *MyWeb;
 
