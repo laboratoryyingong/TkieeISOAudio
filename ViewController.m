@@ -85,8 +85,8 @@
     //Tkiee Website
     NSURL *websiteUrl=[NSURL URLWithString:@"http://www.tkiee.com"];
     NSURLRequest *myrequest=[NSURLRequest requestWithURL:websiteUrl];
-    [self.view addSubview:MyWeb ];
-    [MyWeb loadRequest:myrequest];
+    //[self.view addSubview:MyWeb ];
+    [self.MyWeb loadRequest:myrequest];
     
     self.consolelable.numberOfLines =0;
     self.consolelable.text= @"Recording Tkiee Audio";
@@ -100,6 +100,7 @@
     [self addObserver:self forKeyPath:@"isRecording" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
     
     //upload button
+    progressIndicator.progress=0;
     
     [self.upLoadBtn addTarget:self action:@selector(uploadbtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
