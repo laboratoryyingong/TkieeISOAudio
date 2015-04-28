@@ -11,8 +11,6 @@
 #import "ASIFormDataRequest.h"
 #import "PlayerManager.h"
 
-
-
 #import <stdio.h>
 #import <stdlib.h>
 #import <arpa/inet.h>
@@ -100,6 +98,7 @@
     [self addObserver:self forKeyPath:@"isRecording" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
     
     //upload button
+    
     progressIndicator.progress=0;
     
     [self.upLoadBtn addTarget:self action:@selector(uploadbtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -202,8 +201,7 @@
     
     
     NSLog(@"successful");
-    
- //   NSLog([NSString stringWithFormat:@"transfer %llu ",[theRequest postLength]]);
+//  NSLog([NSString stringWithFormat:@"transfer %llu ",[theRequest postLength]]);
     
     
     NSMutableDictionary *headerData=[theRequest requestHeaders];
@@ -215,7 +213,6 @@
     NSLog(@"Content-Length:%@",[headerData objectForKey:@"Content-Length"]);
     NSLog(@"Accept-Encoding:%@",[headerData objectForKey:@"Accept-Encoding"]);
     
-    //
     NSString *requestData=[theRequest responseString];
     NSLog(@"%@",requestData);
     //[txt setText:requestData];
@@ -272,30 +269,36 @@
 
 #pragma mark - Recording & Playing Delegate
 
-- (void)recordingFinishedWithFileName:(NSString *)filePath time:(NSTimeInterval)interval {
+- (void)recordingFinishedWithFileName:(NSString *)filePath time:(NSTimeInterval)interval
+{
     self.isRecording = NO;
     self.leverlMeter.progress = 0;
     self.filename = filePath;
+    
     [self.consolelable performSelectorOnMainThread:@selector(setText:)
                                         withObject:[NSString stringWithFormat:@"Recording Finished: %@", [self.filename substringFromIndex:[self.filename rangeOfString:@"Documents"].location]]
                                      waitUntilDone:NO];
 }
 
-- (void)recordingTimeout {
+- (void)recordingTimeout
+{
     self.isRecording = NO;
     self.consolelable.text = @"OverTime";
 }
 
-- (void)recordingStopped {
+- (void)recordingStopped
+{
     self.isRecording = NO;
 }
 
-- (void)recordingFailed:(NSString *)failureInfoString {
+- (void)recordingFailed:(NSString *)failureInfoString
+{
     self.isRecording = NO;
     self.consolelable.text = @"Recording failer";
 }
 
-- (void)levelMeterChanged:(float)levelMeter {
+- (void)levelMeterChanged:(float)levelMeter
+{
     self.leverlMeter.progress = levelMeter;
 }
 
