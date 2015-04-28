@@ -81,7 +81,9 @@
     
     [super viewDidLoad];
     //Tkiee Website
-    NSURL *websiteUrl=[NSURL URLWithString:@"http://www.tkiee.com"];
+    //NSURL *websiteUrl=[NSURL URLWithString:@"http://10.233.48.110:8080/login"];
+    
+    NSURL *websiteUrl=[NSURL URLWithString:@"http://www.tkiee.com/login"];
     NSURLRequest *myrequest=[NSURLRequest requestWithURL:websiteUrl];
     //[self.view addSubview:MyWeb ];
     [self.MyWeb loadRequest:myrequest];
