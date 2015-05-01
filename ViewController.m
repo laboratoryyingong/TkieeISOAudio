@@ -84,10 +84,14 @@
     
     [super viewDidLoad];
     //Tkiee Website
+    
     //NSURL *websiteUrl=[NSURL URLWithString:@"http://10.233.48.110:8080/login"];
     
-    NSURL *websiteUrl=[NSURL URLWithString:@"http://www.tkiee.com/login"];
+   
+    //NSURL *websiteUrl=[NSURL URLWithString:@"http://www.tkiee.com/login"];
+    NSURL *websiteUrl=[NSURL URLWithString:@"http://localhost/test.html"];
     NSURLRequest *myrequest=[NSURLRequest requestWithURL:websiteUrl];
+    
     //[self.view addSubview:MyWeb ];
     [self.MyWeb loadRequest:myrequest];
     
@@ -108,24 +112,24 @@
     
     [self.upLoadBtn addTarget:self action:@selector(uploadbtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    // grab local html file
 
-    NSString *htmlPath = BUNDLE_FILE(@"Users/MaxYinGonG/Desktop/TkieeISOAudio/Test.html");
-    
-    //init UIWebView and add to view
-    MyWeb =[[UIWebView alloc] initWithFrame:self.view.bounds];
-    [MyWeb loadHTMLString:HTML_STRING(htmlPath) baseURL:FILE_URL(htmlPath)];
-    
-    // UIWebView run script and listen to callback
-    bridge = [WebViewJavascriptBridge bridgeForWebView:self.MyWeb handler:^(id data, WVJBResponseCallback responseCallback) {
-    
-        NSLog(@"%@", data);
-    }];
-    
 }
 
+-(void)viewWillAppear:(BOOL)animated{
 
+    if(bridge){return;}
+    
+    [WebViewJavascriptBridge enableLogging];
+    
+    bridge = [WebViewJavascriptBridge bridgeForWebView:self.MyWeb handler:^(id data, WVJBResponseCallback responseCallback) {
+    
+    NSLog(@"%@", data);
+    }];
+
+    [bridge registerHandler:@"submit" handler:^(id data, WVJBResponseCallback responseCallback) {
+    NSLog(@"submit called: %@", data);
+    }];
+}
 -(void)viewDidUnload
 {
     [self setTxtlabel:nil];
@@ -245,7 +249,7 @@
 
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
 -(void) dealloc{
@@ -283,6 +287,38 @@
     
     }
 
+
+#pragma mark UIWebViewDelegate
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+  {
+    return true;
+  }
+- (void)webViewDidStartLoad:(UIWebView *)webView
+  {
+    NSLog(@"Start page");
+  }
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+  {
+    NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    NSLog(@"title=%@",title);
+    //NSString *st = [ webView stringByEvaluatingJavaScriptFromString:@"document.getElementById('field_1').value"];
+    NSString *st = [webView stringByEvaluatingJavaScriptFromString:@"document.forms[0]['input1'].value"];
+    NSLog(@"input1 =%@",st);
+    
+    
+  }
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+  {
+    NSLog(@"error %@",error);
+  }
+
+
+
+
+
+
+
 #pragma mark - Recording & Playing Delegate
 
 - (void)recordingFinishedWithFileName:(NSString *)filePath time:(NSTimeInterval)interval
@@ -317,16 +353,6 @@
 {
     self.leverlMeter.progress = levelMeter;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
