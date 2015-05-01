@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
+#import "WebViewJavascriptBridge.h"
 
 
 @class CL_AudioRecorder;
@@ -30,6 +31,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *txtlabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *upLoadBtn;
+
+//Web Javascript Bridge usage
+
+@property (nonatomic, strong) WebViewJavascriptBridge *bridge;
 
 @property (strong, nonatomic) IBOutlet UIWebView *MyWeb;
 

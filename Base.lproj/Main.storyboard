@@ -118,7 +118,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="MyWeb" destination="2sE-Hz-tgW" id="fPW-Dh-EtS"/>
+                        <outlet property="MyWeb" destination="2sE-Hz-tgW" id="KgE-Wr-GHg"/>
                         <outlet property="activityIndicator" destination="ldh-sJ-EBu" id="GgW-lu-ZQh"/>
                         <outlet property="consolelable" destination="yyV-gb-CXq" id="x7I-Vm-ySg"/>
                         <outlet property="leverlMeter" destination="Ysl-Ip-aeR" id="7KT-aB-ees"/>

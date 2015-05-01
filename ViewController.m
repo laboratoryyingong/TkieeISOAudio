@@ -10,6 +10,7 @@
 #import "RecorderManager.h"
 #import "ASIFormDataRequest.h"
 #import "PlayerManager.h"
+#import "WebViewJavascriptBridge.h"
 
 #import <stdio.h>
 #import <stdlib.h>
@@ -29,21 +30,18 @@
 
 @interface ViewController () <RecordingDelegate>
 
-
+//Recording Part
 @property (strong, nonatomic) IBOutlet UIProgressView *leverlMeter;
 
 @property (strong, nonatomic) IBOutlet UILabel *consolelable;
-
-
-@property (strong, nonatomic) IBOutlet UIButton *recordButton;
-
--(IBAction)recordButtonClicked:(id)sender;
-
 
 @property (nonatomic,copy) NSString *filename;
 
 @property (nonatomic,assign) BOOL isRecording;
 
+@property (strong, nonatomic) IBOutlet UIButton *recordButton;
+
+-(IBAction)recordButtonClicked:(id)sender;
 
 
 // define two methods to deal with file upload successfully
@@ -56,12 +54,17 @@
 
 @end
 
+//Web Javascript Bridge constant
+#define BUNDLE_FILE(fileName) [[NSBundle mainBundle] pathForResource:fileName ofType:nil];
+#define HTML_STRING(htmlPath) [NSString stringWithContentsOfFile:htmlPath \ encoding:NSUTF8StringEncoding error:nil]
+#define FILE_URL(path)        [NSURL fileURLWithPath:path]
+
 
 
 @implementation ViewController
 
-
 @synthesize MyWeb;
+@synthesize bridge;
 @synthesize activityIndicator;
 @synthesize upLoadBtn;
 @synthesize txtlabel;
@@ -106,8 +109,19 @@
     [self.upLoadBtn addTarget:self action:@selector(uploadbtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    
+    // grab local html file
 
+    NSString *htmlPath = BUNDLE_FILE(@"Users/MaxYinGonG/Desktop/TkieeISOAudio/Test.html");
+    
+    //init UIWebView and add to view
+    MyWeb =[[UIWebView alloc] initWithFrame:self.view.bounds];
+    [MyWeb loadHTMLString:HTML_STRING(htmlPath) baseURL:FILE_URL(htmlPath)];
+    
+    // UIWebView run script and listen to callback
+    bridge = [WebViewJavascriptBridge bridgeForWebView:self.MyWeb handler:^(id data, WVJBResponseCallback responseCallback) {
+    
+        NSLog(@"%@", data);
+    }];
     
 }
 
